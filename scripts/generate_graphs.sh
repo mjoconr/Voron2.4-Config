@@ -1,13 +1,16 @@
 #!/bin/bash
 
-FILES=`ls /tmp/calibration_data_*.csv`
+FILES="/tmp/calibration_data"
 
-mkdir -p ~/klipper_config/graphs
+mkdir -p ~/printer_data/config/graphs
 
-for file in ${FILES}
+for file in "${FILES}"_*.csv
 do
-	name=`basename ${file} .csv`
-	~/klipper/scripts/calibrate_shaper.py $file -o ~/klipper_config/graphs/${name}.png
-	mv $file $file.processed 
+        if [ -f "$file" ];then
+          name=$(basename "${file}" .csv)
+	echo basename $name
+          ~/klipper/scripts/calibrate_shaper.py "${file}" -o ~/printer_data/config/graphs/"${name}".png
+          mv "$file" ~/printer_data/config/graphs/"$name".processed
+        fi
 done
 
