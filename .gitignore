@@ -1,3 +1,5 @@
 # Add git ignores
 .moonraker.conf.bkp
 printer-*.cfg
+graphs
+ShakeTune_results
